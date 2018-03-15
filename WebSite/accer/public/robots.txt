@@ -1,0 +1,8 @@
+User-agent : Googlebot
+Disallow : /nongooglebot/
+
+User-agent : *
+Allow : /
+Disallow : /?p=admin
+
+Sitemap : https://accer.ddns.net/sitemap.xml
