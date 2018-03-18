@@ -33,6 +33,8 @@ class DownloadManager {
 	public function download()
 	{
 		if ($this->exe_name != NULL) {
+			$req_ins = $this->db->prepare("INSERT INTO download(IP) VALUES(?)");
+			$req_ins->execute(array($_SERVER["REMOTE_ADDR"]));
 			$path = $this->build_folder.$this->exe_name;
 			header("Content-Description: File Transfer"); 
 			header("Content-Type: application/octet-stream"); 
