@@ -36,6 +36,8 @@ if (!$in_cache) {
 					</div>
 					<div class="card-content">
 						<h3 class="center"><?= $profil->name().' '.$profil->firstname(); ?></h3>
+						<h4 class="center"><?= $profil->login(); ?></h4>
+						<br/ >
 						<p><?= $profil->description() ?></p>
 						<p>Date d'inscription : <?= $profil->date_register(); ?></p>
 					</div>

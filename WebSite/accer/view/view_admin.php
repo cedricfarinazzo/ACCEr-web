@@ -156,6 +156,7 @@ ob_start();
 					<td>ID</td>
 					<td>Firtname</td>
 					<td>Name</td>
+					<td>Pseudo</td>
 					<td>Email</td>
 					<td>Description</td>
 					<td>Avatar id</td>
@@ -169,6 +170,7 @@ ob_start();
 					<td>ID</td>
 					<td>Firtname</td>
 					<td>Name</td>
+					<td>Pseudo</td>
 					<td>Email</td>
 					<td>Description</td>
 					<td>Avatar id</td>
@@ -183,6 +185,7 @@ ob_start();
 					<td><?= $u->ID(); ?></td>
 					<td><?= $u->firstname(); ?></td>
 					<td><?= $u->name(); ?></td>
+					<td><?= $u->login(); ?></td>
 					<td><?= $u->email(); ?></td>
 					<td><?= $u->description(); ?></td>
 					<td><?= $u->avatar_path();?></td>

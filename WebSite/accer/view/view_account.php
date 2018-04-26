@@ -7,13 +7,14 @@ if (!$connected)
 }
 
 if (isset($_POST["account-perso"])) {
-  if ((isset($_POST["name"])) && (isset($_POST["mail"])) && (isset($_POST["firstname"]))) {
-	if ((!empty($_POST["name"])) && (!empty($_POST["mail"])) && (!empty($_POST["firstname"]))) {
+  if ((isset($_POST["name"])) && (isset($_POST["mail"])) && (isset($_POST["firstname"])) && (isset($_POST["login"]))) {
+	if ((!empty($_POST["name"])) && (!empty($_POST["mail"])) && (!empty($_POST["firstname"])) && (!empty($_POST["login"]))) {
 		if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
 			$name = $_POST["name"];
 			$firstname = $_POST["firstname"];
 			$email = $_POST["mail"];
-			if ($user->update($name, $firstname, NULL, $email, $user->description('nochange'), $user->avatar_path())) {
+			$login = $_POST["login"];
+			if ($user->update($name, $firstname, NULL, $email, $login, $user->description('nochange'), $user->avatar_path())) {
 				$user->refresh();
 				$success = "Les modifications ont bien été pris en compte.";
 			} else {
@@ -158,9 +159,13 @@ ob_start();
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12">
+					<div class="input-field col s6">
 						<input id="email" type="email" name="mail" value="<?= $user->email('nochange') ?>" class="validate"/>
 						<label class="active" for="email">Email</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="login" name="login" type="text" value="<?= $user->login('nochange') ?>" class="validate"/>
+						<label class="login" for="login">Pseudo</label>
 					</div>
 				</div>
 				<div class="row center-align">

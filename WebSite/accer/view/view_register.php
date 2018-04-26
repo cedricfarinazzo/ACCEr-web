@@ -7,17 +7,18 @@ if ($connected)
 }
 
 if (isset($_POST["register"])) {
-  if ((isset($_POST["name"])) && (isset($_POST["mail"])) && (isset($_POST["pass"])) && (isset($_POST["passcomfirm"])) && (isset($_POST["firstname"]))) {
-	if ((!empty($_POST["name"])) && (!empty($_POST["mail"])) && (!empty($_POST["pass"])) && (!empty($_POST["passcomfirm"])) && (!empty($_POST["firstname"]))) {
+  if ((isset($_POST["name"])) && (isset($_POST["mail"])) && (isset($_POST["pass"])) && (isset($_POST["login"])) && (isset($_POST["passcomfirm"])) && (isset($_POST["firstname"]))) {
+	if ((!empty($_POST["name"])) && (!empty($_POST["mail"])) && (!empty($_POST["pass"])) && (!empty($_POST["login"])) && (!empty($_POST["passcomfirm"])) && (!empty($_POST["firstname"]))) {
 		if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
 			$mail = $_POST["mail"];
+			$login = $_POST["login"];
 			$name = $_POST["name"];
 			$firstname = $_POST["firstname"];
 			$name = $_POST["name"];
 			$pass = hash("sha512",$_POST["pass"]);
 			$passcomfirm = hash("sha512",$_POST["passcomfirm"]);
 			if ($pass == $passcomfirm) {
-				if ($user->register($name, $firstname, $pass, $mail)) {
+				if ($user->register($name, $firstname, $pass, $mail, $login)) {
 					if (isset($_POST["remember"])) {
 						$user->remember();
 					}
@@ -53,9 +54,13 @@ ob_start();
 	<div class="row">
 		<form class="col s12" action= "?p=register" method="post">
 			<div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s6">
 					<input id="email" type="email" name="mail" class="validate"/>
 					<label class="active" for="email">Email</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="login" name="login" type="text" value="<?= $user->login('nochange') ?>" class="validate"/>
+					<label class="login" for="login">Pseudo</label>
 				</div>
 			</div>
 			

@@ -3,6 +3,7 @@ class UserManager {
 
 	private $db;
 	protected $ID;
+	protected $login;
 	protected $name;
 	protected $firstname;
 	protected $pass;
@@ -126,13 +127,13 @@ class UserManager {
 		
 	}
 	
-	public function register($name, $firstname, $pass, $mail)
+	public function register($name, $firstname, $pass, $mail, $login)
 	{
 		$req = $this->db->prepare('SELECT * FROM user WHERE email = ?');
 		$req->execute(array($mail));
 		if ($req->rowCount() == 0) {
-			$req = $this->db->prepare('INSERT INTO user(name, firstname, email, pass, date_register) VALUES(?, ?,?,?, NOW())');
-			$req->execute(array($name, $firstname, $mail, $pass));
+			$req = $this->db->prepare('INSERT INTO user(name, firstname, email, pass, login, date_register) VALUES(?, ?, ?, ?, ?, NOW())');
+			$req->execute(array($name, $firstname, $mail, $pass, $login));
 			$req->closeCursor();
 			$req = $this->db->prepare('SELECT * FROM user WHERE email = ? AND pass = ?');
 			$req->execute(array($mail, $pass));
@@ -143,7 +144,7 @@ class UserManager {
 		return false;
 	}
 	
-	public function update($name, $firstname, $pass, $mail, $description, $avatar_path)
+	public function update($name, $firstname, $pass, $mail, $login, $description, $avatar_path)
 	{
 		if ($pass == NULL) {
 			$pass = $this->pass;
@@ -151,8 +152,8 @@ class UserManager {
 		$req = $this->db->prepare('SELECT * FROM user WHERE email = ? AND ID <> ?');
 		$req->execute(array($mail, $this->ID()));
 		if ($req->rowCount() == 0) {
-			$req_update = $this->db->prepare("UPDATE user SET name = ?, firstname = ?, pass = ?, email = ?, description = ?, avatar_path = ?  WHERE ID = ?");
-			$req_update->execute(array($name, $firstname, $pass, $mail, $description, $avatar_path, $this->ID()));
+			$req_update = $this->db->prepare("UPDATE user SET name = ?, firstname = ?, pass = ?, login = ?,email = ?, description = ?, avatar_path = ?  WHERE ID = ?");
+			$req_update->execute(array($name, $firstname, $pass, $login, $mail, $description, $avatar_path, $this->ID()));
 			return true;
 		}
 		return false;
@@ -335,6 +336,14 @@ class UserManager {
 			$this->name = $name;
 		}
 	}
+	
+	public function setLogin($name)
+	{
+		if (is_string($name))
+		{
+			$this->login = $name;
+		}
+	}
 
 	public function setFirstname($name)
 	{
@@ -399,6 +408,17 @@ class UserManager {
 			return ($this->name);
 		}
 		return htmlspecialchars($this->name);
+	}
+	
+	public function login($service = NULL)
+	{
+		if ($service == 'input') {
+			return str_replace(["<","script","/>",">"],"",$this->login);
+		}
+		if ($service == 'nochange') {
+			return ($this->login);
+		}
+		return htmlspecialchars($this->login);
 	}
    
 	public function firstname($service = NULL)
