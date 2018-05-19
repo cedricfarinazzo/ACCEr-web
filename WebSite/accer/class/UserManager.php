@@ -144,7 +144,7 @@ class UserManager {
 		return false;
 	}
 	
-	public function update($name, $firstname, $pass, $mail, $login, $description, $avatar_path)
+	public function update($name, $firstname, $pass, $mail, $description, $avatar_path, $login)
 	{
 		if ($pass == NULL) {
 			$pass = $this->pass;

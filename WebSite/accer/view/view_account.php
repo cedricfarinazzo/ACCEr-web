@@ -14,7 +14,7 @@ if (isset($_POST["account-perso"])) {
 			$firstname = $_POST["firstname"];
 			$email = $_POST["mail"];
 			$login = $_POST["login"];
-			if ($user->update($name, $firstname, NULL, $email, $login, $user->description('nochange'), $user->avatar_path())) {
+			if ($user->update($name, $firstname, NULL, $email, $user->description('nochange'), $user->avatar_path(), $login)) {
 				$user->refresh();
 				$success = "Les modifications ont bien été pris en compte.";
 			} else {
@@ -35,7 +35,7 @@ if (isset($_POST["account-pass"])) {
 		$passcomfirm = hash("sha512",$_POST["passcomfirm"]);
 		if ($oldpass == $user->pass()) {
 			if ($newpass == $passcomfirm) {
-				if ($user->update($user->name('nochange'), $user->firstname('nochange'), $newpass, $user->email('nochange'), $user->description('nochange'), $user->avatar_path())) {
+				if ($user->update($user->name('nochange'), $user->firstname('nochange'), $newpass, $user->email('nochange'), $user->description('nochange'), $user->avatar_path(), $user->login('nochange'))) {
 					$user->refresh();
 					$success = "Les modifications ont bien été pris en compte.";
 				} else {
@@ -58,7 +58,7 @@ if (isset($_POST["account-description"])) {
 	if (!empty($_POST["description"])) {
 		$description = $_POST["description"];
 		if (strlen($description) <= 500) {
-			if ($user->update($user->name('nochange'), $user->firstname('nochange'), NULL, $user->email('nochange'), $description, $user->avatar_path())) {
+			if ($user->update($user->name('nochange'), $user->firstname('nochange'), NULL, $user->email('nochange'), $description, $user->avatar_path(), $user->login('nochange'))) {
 				$user->refresh();
 				$success = "Les modifications ont bien été pris en compte.";
 			} else {
@@ -78,7 +78,7 @@ if (isset($_POST["account-avatar"])) {
 				$upload_img = new ImageManager($db);
 				$id_img = $upload_img->register($_FILES["profil-file"]['tmp_name'], $_FILES["profil-file"]['name']);
 				if (((int) $id_img) > 0) {
-					if ($user->update($user->name('nochange'), $user->firstname('nochange'), NULL, $user->email('nochange'), $user->description('nochange'), $id_img)) {
+					if ($user->update($user->name('nochange'), $user->firstname('nochange'), NULL, $user->email('nochange'), $user->description('nochange'), $id_img, $user->login('nochange'))) {
 						$user->refresh();
 						$success = "Les modifications ont bien été pris en compte.";
 					} else {
