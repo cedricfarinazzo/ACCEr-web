@@ -261,7 +261,7 @@ ob_start();
 			
 			<br/>
 			<div class="account-info border" style="padding: 15px">
-				<p class="center-align">Autre informations sur votre compte.</p>
+				<p class="center-align">Autres informations sur votre compte.</p>
 				<div class="row" style="padding: 15px">
 					Date d'inscription : <?= $user->date_register(); ?>
 				</div>
