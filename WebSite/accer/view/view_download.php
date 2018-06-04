@@ -4,25 +4,10 @@ $in_cache = $cache->on_cache();
 if (!$in_cache) {
 	ob_start();
 	$downloadmanager = new DownloadManager($db);
-	$available = false;
-	if ($downloadmanager->search()) {
-		$path = $downloadmanager->build_folder;
-		$name = $downloadmanager->exe_name;
-		$size = filesize($path.$name);
-		if ($size >= 1000000000) {
-			$size = ((int)($size / 1000000000)).' Go';
-		}
-		elseif ($size >= 1000000) {
-			$size = ((int)($size / 1000000)).' mo';
-		}
-		elseif ($size >= 1000) {
-			$size = ((int)($size / 1000)).' ko';
-		}
-		else {
-			$size = ((int)$size).' o';
-		}
-		$available = true;
-	}
+	$downloadmanager->search();
+	$available = count($downloadmanager->exe_name) != 0;
+	$path = $downloadmanager->build_folder;
+	
 	$request = ob_get_contents();
 	ob_end_clean();
 
@@ -62,11 +47,39 @@ if (!$in_cache) {
 						</tr>
 					</tfoot>
 					<tbody>
-							<td><?= $name; ?></td>
-							<td>Beta(0.1)</td>
-							<td>Windows</td>
-							<td><?= $size ?></td>
-							<td><a href="<?= URL_PATH ?>/download.php">Télécharger</a></td>
+						<?php
+							foreach($downloadmanager->exe_name as $exe)
+							{
+								$size = filesize($path.$exe);
+								if ($size >= 1000000000) {
+									$size = ((int)($size / 1000000000)).' Go';
+								}
+								elseif ($size >= 1000000) {
+									$size = ((int)($size / 1000000)).' mo';
+								}
+								elseif ($size >= 1000) {
+									$size = ((int)($size / 1000)).' ko';
+								}
+								else {
+									$size = ((int)$size).' o';
+								}
+								$version = "Beta(0.3)";
+								$link = "/download.php";
+								if (strpos($exe, 'lite') !== false) {
+									$version = "lite-".$version;
+									$link = "/download-lite.php";
+								}
+								?>
+								<tr>
+									<td><?= $exe; ?></td>
+									<td><?= $version; ?></td>
+									<td>Windows</td>
+									<td><?= $size ?></td>
+									<td><a href="<?= URL_PATH.$link; ?>">Télécharger</a></td>
+								</tr>
+								<?php
+							}							
+						?>
 					</tbody>
 				</table>
 			</div>

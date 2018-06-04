@@ -135,9 +135,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 					  <div class="col l4 offset-l2 s12">
 						<h5 class="white-text">Liens utiles</h5>
 						<ul>
-							<li><a class="grey-text text-lighten-3" href="#">Notre Facebook</a></li>
-							<li><a class="grey-text text-lighten-3" href="#">Notre Tweeter</a></li>
-							<li><a class="grey-text text-lighten-3" href="https://github.com/cedricfarinazzo/ACCEr">Notre GitHub</a></li>
+							<li><a class="grey-text text-lighten-3" href="https://github.com/cedricfarinazzo/ACCEr-exe">Notre GitHub</a></li>
 						</ul>
 					  </div>
 					</div>

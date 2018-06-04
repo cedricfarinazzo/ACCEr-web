@@ -2,7 +2,8 @@
 
 $cache = new CacheManager("user", (int)$_GET['id']);
 $in_cache = $cache->on_cache();
-if (!$in_cache) {
+//if (!$in_cache) {
+if (true) {
 	
 	ob_start();
 
