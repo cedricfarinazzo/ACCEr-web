@@ -37,9 +37,24 @@ class ProgressManager {
 	
 	public function GetList()
 	{
-		$req = $this->db->query('SELECT * FROM  user LEFT JOIN Game ON Game.ID_user == user.ID ORDER BY Game.SoloStats DESC, Game.MultiStats DESC');
-		$req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'ProgressManager', array($this->db));
-		return $req;
+		$result = array();
+		$req_user = $this->db->query('SELECT ID, login FROM  user');
+		while ($data = $req_user->fetch())
+		{
+			$p = new ProgressManager($this->db);
+			$id = $data["ID"];
+			$p->hydrate($data);
+			$req_progress = $this->db->prepare('SELECT * FROM Game WHERE ID_user = ?');
+			$req_progress->execute(array($id));
+			if ($req_progress->rowCount() == 1)
+			{
+				$data_p = $req_progress->fetch();
+				$data_p["ID"] = $id;
+				$p->hydrate($data_p);
+			}
+			$result[] = $p;
+		}
+		return $result;
 	}	
 	
 	public function GetById($id)
@@ -57,6 +72,7 @@ class ProgressManager {
 				if ($req_progress->rowCount() == 1)
 				{
 					$data_p = $req_progress->fetch();
+					$data_p["ID"] = $id;
 					$this->hydrate($data_p);
 				}
 				
@@ -69,7 +85,7 @@ class ProgressManager {
 	
 	public function __is_smaller(ProgressManager $m1, ProgressManager $m2)
 	{
-		return $m1->solostats() < $m2->solostats() && $m2->multistats();
+		return $m1->solostats() < $m2->solostats() || $m1->multistats()  < $m2->multistats();
 	}
 	
 	public function setId($id)

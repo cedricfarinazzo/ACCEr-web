@@ -63,6 +63,8 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 								<li class="divider"></li>
 								<li><a href="?p=progress">Progression</a></li>
 								<li class="divider"></li>
+								<li><a href="?p=leaderboard">Classement des joueurs</a></li>
+								<li class="divider"></li>
 								<li><a href="?p=download">Télécharger !</a></li>
 							</ul>
 							
@@ -95,6 +97,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 								<li><a href="?p=source">Les sources</a></li>
 								<li><a href="?p=report">Rapport</a></li>
 								<li><a href="?p=progress">Progression</a></li>
+								<li><a href="?p=leaderboard">Classement des joueurs</a></li>
 								<li><a href="?p=download">Télécharger !</a></li>
 								<li class="divider"></li>
 								<li><a href="?p=chat">Discussion en direct</a></li>
