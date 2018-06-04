@@ -44,13 +44,22 @@ class ProgressManager {
 	
 	public function GetById($id)
 	{
-		if (is_int($id)
+		if (is_int($id))
 		{
-			$req = $this->db->prepare('SELECT * FROM  user LEFT JOIN Game ON Game.ID_user == user.ID WHERE user.ID = ?');
-			$req->execute(array($id));
-			if ($req->rowCount() == 1)
+			$req_user = $this->db->prepare('SELECT * FROM user WHERE ID = ?');
+			$req_user->execute(array($id));
+			if ($req_user->rowCount() == 1)
 			{
-				$this->hydrate($req->fetch());
+				$data = $req_user->fetch();
+				$this->hydrate($data);
+				$req_progress = $this->db->prepare('SELECT * FROM Game WHERE ID_user = ?');
+				$req_progress->execute(array($id));
+				if ($req_progress->rowCount() == 1)
+				{
+					$data_p = $req_progress->fetch();
+					$this->hydrate($data_p);
+				}
+				
 				return true;
 			}
 			return false;
@@ -60,10 +69,10 @@ class ProgressManager {
 	
 	public function __is_smaller(ProgressManager $m1, ProgressManager $m2)
 	{
-		return $m1->solostats() < $m2->solostats() && $m2->multistats()
+		return $m1->solostats() < $m2->solostats() && $m2->multistats();
 	}
 	
-	public function setId_user($id)
+	public function setId($id)
 	{
 		$this->id_user = $id;
 	}
@@ -100,16 +109,28 @@ class ProgressManager {
 	
 	public function solostats()
 	{
+		if (empty($this->solo))
+		{
+			return 0;
+		}
 		return $this->solo;
 	}
 	
 	public function multistats()
 	{
+		if (empty($this->multi))
+		{
+			return 0;
+		}
 		return $this->multi;
 	}
 	
 	public function lastupdate()
 	{
+		if (empty($this->update))
+		{
+			return "Jamais";
+		}
 		return $this->update;
 	}
 	

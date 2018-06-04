@@ -48,6 +48,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 									<li><a href="?p=account">Paramètre du compte</a></li>
 									<li class="divider"></li>
 									<li><a href="<?= URL_PATH.'/?p=user&id='.urldecode($user->ID()); ?>">Voir mon profil </a></li>
+									<li><a href="<?= URL_PATH.'/?p=progressgame&id='.urldecode($user->ID()); ?>">Ma progression </a></li>
 									<li class="divider"></li>
 									<li><a href="?p=logout">Déconnexion</a></li>
 								</ul>
@@ -103,6 +104,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 								<?php if ($connected) { ?>
 									<li><a href="?p=account">Paramètre du compte</a></li>
 									<li><a href="<?= URL_PATH.'/?p=user&id='.urldecode($user->ID()); ?>">Voir mon profil </a></li>
+									<li><a href="<?= URL_PATH.'/?p=progressgame&id='.urldecode($user->ID()); ?>">Ma progression </a></li>
 									<li><a href="?p=logout">Déconnexion</a></li>
 								<?php } else { ?>
 									<li><a href="?p=connect">Se connecter</a></li>
