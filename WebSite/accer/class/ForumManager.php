@@ -6,7 +6,7 @@ class ForumManager {
 	
 	public function __construct(PDO $db)
 	{
-		$this.setDb($db);
+		$this->setDb($db);
 	}
 	
 	public function __destruct()
@@ -14,11 +14,9 @@ class ForumManager {
 		$this->db = NULL;
 	}
 	
-	public function create
-	
 	public function setDb($db)
 	{
-		$this.db = $db;
+		$this->db = $db;
 	}
 	
 }

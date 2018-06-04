@@ -30,7 +30,7 @@ class DownloadManager {
 		
 	}
 	
-	public function download(bool $lite = false)
+	public function download($lite = false)
 	{
 		if ($this->exe_name != NULL) {
 			$req_ins = $this->db->prepare("INSERT INTO download(IP) VALUES(?)");
