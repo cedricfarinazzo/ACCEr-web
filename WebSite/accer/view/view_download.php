@@ -18,7 +18,7 @@ if (!$in_cache) {
 		<br/>
 		<div class="container">
 			Pour le moment, le jeu Shadow Miner est encore en développement.<br/>
-			La version finale du jeu sortira en début juin.
+			La version finale du jeu sortira début juin.
 		</div>
 		<br/>
 		<div class="divider"></div>

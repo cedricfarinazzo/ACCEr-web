@@ -9,11 +9,11 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 		<title><?= ORGANIZATION_NAME ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 		<link rel="stylesheet" type="text/css"  href="assets/css/style.css" media="screen,projection"/>
 		<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon/favicon.ico" />
 		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114348221-1"></script>
 		<script>
@@ -22,6 +22,11 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 			gtag('js', new Date());
 			gtag('config', 'UA-114348221-1');
 		</script>
+		<style>
+			.parallax-container {
+			  height: 600px;
+			}
+		</style>
 		<!--script type="text/javascript" src="/assets/js/turbolinks.js"></script-->
 	</head>
 	<body>
@@ -120,6 +125,15 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 						</div>
 					</nav>
 				<div>
+				
+				<!-- Parralax banner start -->
+
+				<div id="index-banner" class="parallax-container">
+					<div class="parallax"><img src="assets/image/background.png"></div>
+				</div>
+
+				<!-- Parallax banner end -->
+				
 			</header>
 			<br/>
 			<section>
@@ -147,7 +161,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 				</div>
 				<div class="footer-copyright">
 					<div class="container">
-						© 2017 Copyright <?= ORGANIZATION_NAME ?>
+						© 2018 Copyright <?= ORGANIZATION_NAME ?>
 						<a class="grey-text text-lighten-4 right" href="?p=terms">Conditions générales</a>
 					</div>
 				</div>
@@ -183,6 +197,12 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 			function accept_cookie ($){
 				$('#cookie').load('<?= URL_PATH ?>/assets/ajax/accept_cookie.php');
 			}
+			
+			(function($){
+			  $(function(){
+				$('.parallax').parallax();
+			  });
+			})(jQuery);
 		</script>
 		<?php if ((int)date("m") >= 11 || (int)date("m") <= 3) { ?>
 			<script type="text/javascript" src="<?= URL_PATH ?>/assets/js/snow.js"></script>
