@@ -1,7 +1,3 @@
-<?php 
-$accer_logoManager = new ImageManager($db);
-$accer_logo = $accer_logoManager->GetTokenByID(1);
-?>
 <!DOCTYPE HTML>
 <html lang="fr">
 	<head>
@@ -46,7 +42,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 				<div class="navbar-div">
 					<nav class="red accent-4">
 						<div class="container nav-wrapper">
-							<a href="?p=accueil" class="brand-logo"><img class="responsive-img" src="<?= URL_PATH.'/image.php?img='.urlencode($accer_logo).'&larg=90'; ?>"  alt="accer-logo"></a>
+							<a href="?p=accueil" class="brand-logo"><img class="responsive-img" src="/assets/image/accer_logo.png"  width="110" alt="accer-logo"></a>
 							<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 							<?php if ($connected) { ?>
 								<ul id="account-dropdown" class="dropdown-content">
@@ -69,6 +65,8 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 								<li><a href="?p=progress">Progression</a></li>
 								<li class="divider"></li>
 								<li><a href="?p=leaderboard">Classement des joueurs</a></li>
+								<li class="divider"></li>
+								<li><a href="?p=trailer">Trailer du jeu</a></li>
 								<li class="divider"></li>
 								<li><a href="?p=download">Télécharger !</a></li>
 							</ul>
@@ -103,6 +101,7 @@ $accer_logo = $accer_logoManager->GetTokenByID(1);
 								<li><a href="?p=report">Rapport</a></li>
 								<li><a href="?p=progress">Progression</a></li>
 								<li><a href="?p=leaderboard">Classement des joueurs</a></li>
+								<li><a href="?p=trailer">Trailer du jeu</a></li>
 								<li><a href="?p=download">Télécharger !</a></li>
 								<li class="divider"></li>
 								<li><a href="?p=chat">Discussion en direct</a></li>
