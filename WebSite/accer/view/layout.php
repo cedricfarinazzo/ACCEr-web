@@ -93,6 +93,7 @@
 								<?php if ($user->rank() == "admin" || $user->rank() == "webmaster") { ?> 
 									<li><a href="?p=admin">Administration</a></li>
 								<?php } ?>
+								<li><a href="?p=support">Support</a></li>
 							</ul>
 							
 							<ul class="side-nav" id="mobile-demo">
@@ -118,8 +119,11 @@
 									<li><a href="?p=register">S'inscrire</a></li>
 								<?php } ?>
 								<?php if ($user->rank() == "admin" || $user->rank() == "webmaster") { ?> 
+									<li class="divider"></li>
 									<li><a href="?p=admin">Administration</a></li>
 								<?php } ?>
+								<li class="divider"></li>
+								<li><a href="?p=support">Support</a></li>
 							</ul>
 						</div>
 					</nav>

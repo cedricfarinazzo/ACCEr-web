@@ -275,6 +275,7 @@ ob_start();
 			?>
 			$('#description').val(data);
 			$('#description').trigger('autoresize');
+			$('#description').characterCounter();
 		})(jQuery);
 		$(document).ready(function(){
 			$('.materialboxed').materialbox();

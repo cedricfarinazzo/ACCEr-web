@@ -57,7 +57,8 @@ class DownloadManager {
 			$path = $this->build_folder.$exe_name;
 			header("Content-Description: File Transfer"); 
 			header("Content-Type: application/octet-stream"); 
-			header("Content-Disposition: attachment; filename='".$this->exe_name."'"); 
+			header("Content-Disposition: attachment; filename='".$exe_name."'"); 
+			header('Content-Length: ' . filesize($path));
 			readfile($path);
 		}
 	}	
